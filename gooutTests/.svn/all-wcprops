@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/goout/!svn/ver/2/trunk/gooutTests
+END
+gooutTests-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/goout/!svn/ver/2/trunk/gooutTests/gooutTests-Info.plist
+END
+gooutTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/goout/!svn/ver/2/trunk/gooutTests/gooutTests.h
+END
+gooutTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/goout/!svn/ver/2/trunk/gooutTests/gooutTests.m
+END
