@@ -15,6 +15,7 @@
     CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
+    //
 }
 @synthesize mapview;
 @synthesize distancelabel;
