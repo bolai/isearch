@@ -8,6 +8,7 @@
 
 #import "SecondViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import <GoogleMaps/GMSMapView.h>
 
 
 @implementation SecondViewController{
@@ -17,8 +18,10 @@
     CLPlacemark *placemark;
     //
 }
-@synthesize mapview;
+@synthesize viewForMap;
 @synthesize distancelabel;
+@synthesize mapView;
+@synthesize camera;
 
 - (void)didReceiveMemoryWarning
 {
@@ -28,6 +31,7 @@
 
 - (void)changesomething:(id)sender{
     NSLog(@"second view test....");
+
 }
 #pragma mark - View lifecycle
 
@@ -40,9 +44,7 @@
     
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
     [locationManager startUpdatingLocation];
-    
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -103,22 +105,26 @@
         NSLog(@"distance is:%f",meters);
         self.distancelabel.text = [NSString stringWithFormat:@"%.0f", meters];
         
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude zoom:6];
-        mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+        camera = [GMSCameraPosition cameraWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude zoom:6];
+        self.mapView = [GMSMapView mapWithFrame:viewForMap.bounds camera:camera];
+        //self.mapView.delegate = self;
+        
+        NSLog(@"width is:%f",viewForMap.bounds.size.width);
+        NSLog(@"height is:%f",viewForMap.bounds.size.height);
+        
         mapView_.myLocationEnabled = YES;
         
         //display marker on mapview
         marker.map = mapView_;
 
         //display mapview
-        self.mapview = mapView_;
-        
+        //self.mapview = mapView_;
+        [self.viewForMap addSubview:mapView];
     }
 }
 
 - (void)viewDidUnload
 {
-    [self setMapview:nil];
     [self setDistancelabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.

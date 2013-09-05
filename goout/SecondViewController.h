@@ -11,7 +11,10 @@
 #import <GoogleMaps/GMSMapView.h>
 
 @interface SecondViewController : UIViewController<CLLocationManagerDelegate>
-@property (strong, nonatomic) IBOutlet UIView *mapview;
+@property (strong, nonatomic) IBOutlet UIView *viewForMap;
+@property (nonatomic, strong) IBOutlet GMSMapView *mapView;
+@property (nonatomic, strong) IBOutlet GMSCameraPosition *camera;
+
 @property (weak, nonatomic) IBOutlet UILabel *distancelabel;
 
 - (IBAction)changesomething:(id)sender;
