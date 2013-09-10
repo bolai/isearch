@@ -12,7 +12,6 @@
 
 
 @implementation SecondViewController{
-    GMSMapView *mapView_;
     CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
@@ -31,6 +30,13 @@
 
 - (void)changesomething:(id)sender{
     NSLog(@"second view test....");
+    // Do any additional setup after loading the view, typically from a nib.
+    locationManager = [[CLLocationManager alloc] init];
+    geocoder = [[CLGeocoder alloc] init];
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
 
 }
 #pragma mark - View lifecycle
@@ -38,13 +44,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    locationManager = [[CLLocationManager alloc] init];
-    geocoder = [[CLGeocoder alloc] init];
-    
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager startUpdatingLocation];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -89,46 +88,55 @@
         
         NSLog(@"%@",x);
         NSLog(@"%@",y);
-        NSLog(@"%@", address);
+        NSLog(@"address is %@", address);
         
         [locationManager stopUpdatingLocation];
         
         
         
         GMSMarker *marker = [[GMSMarker alloc] init];
-        marker.position = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude-1, currentLocation.coordinate.longitude-1);
-        marker.title = address;
+        //test
+        marker.position = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude - 0.1, currentLocation.coordinate.longitude - 0.1);
+        
+        marker.title = @"1888 Ice Cream";
         marker.snippet = address;
         CLLocation* dist=[[CLLocation alloc] initWithLatitude:marker.position.latitude longitude:marker.position.longitude];  
         CLLocationDistance meters=[currentLocation distanceFromLocation:dist];
         
         NSLog(@"distance is:%f",meters);
-        self.distancelabel.text = [NSString stringWithFormat:@"%.0f", meters];
+        self.distancelabel.text = [NSString stringWithFormat:@"distance %.0f meters", meters];
         
-        camera = [GMSCameraPosition cameraWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude zoom:6];
-        self.mapView = [GMSMapView mapWithFrame:viewForMap.bounds camera:camera];
-        //self.mapView.delegate = self;
+        camera = [GMSCameraPosition cameraWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude zoom:10];
+        self.mapView = [GMSMapView mapWithFrame:self.viewForMap.bounds camera:camera];
+        self.mapView.delegate = self;
         
-        NSLog(@"width is:%f",viewForMap.bounds.size.width);
-        NSLog(@"height is:%f",viewForMap.bounds.size.height);
         
-        mapView_.myLocationEnabled = YES;
+        NSLog(@"width is:%f",self.viewForMap.frame.size.width);
+        NSLog(@"height is:%f",self.viewForMap.frame.size.height);
+        
+        self.mapView.myLocationEnabled = YES;
         
         //display marker on mapview
-        marker.map = mapView_;
-
+        marker.map = self.mapView;
+        
         //display mapview
-        //self.mapview = mapView_;
-        [self.viewForMap addSubview:mapView];
+        if(self.mapView){
+            [self.viewForMap addSubview:self.mapView];
+        } 
     }
 }
 
 - (void)viewDidUnload
 {
+    [self setViewForMap:nil];
     [self setDistancelabel:nil];
+    [self setMapView:nil];
+    [self setCamera:nil];
+    locationManager = nil;
+    geocoder = nil;
+    placemark = nil;
+    [self setViewForMap:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

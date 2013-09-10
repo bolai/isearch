@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GMSMapView.h>
 
-@interface SecondViewController : UIViewController<CLLocationManagerDelegate>
+@interface SecondViewController : UIViewController<CLLocationManagerDelegate, GMSMapViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *viewForMap;
 @property (nonatomic, strong) IBOutlet GMSMapView *mapView;
 @property (nonatomic, strong) IBOutlet GMSCameraPosition *camera;
