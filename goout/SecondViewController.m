@@ -111,18 +111,37 @@
         self.mapView.delegate = self;
         
         
-        NSLog(@"width is:%f",self.viewForMap.frame.size.width);
-        NSLog(@"height is:%f",self.viewForMap.frame.size.height);
+        //NSLog(@"width is:%f",self.viewForMap.frame.size.width);
+        //NSLog(@"height is:%f",self.viewForMap.frame.size.height);
         
         self.mapView.myLocationEnabled = YES;
+        self.mapView.settings.myLocationButton = YES;
         
-        //display marker on mapview
+        //display marker on map
         marker.map = self.mapView;
         
-        //display mapview
+        //circle
+        CLLocationCoordinate2D circleCenter = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+        GMSCircle *circle = [GMSCircle circleWithPosition:circleCenter radius:10000]; //1000 meters
+        circle.fillColor = [UIColor colorWithRed:0.25 green:0 blue:0 alpha:0.2];
+        circle.strokeColor = [UIColor redColor];
+        circle.strokeWidth = 5;
+        //display circle on map
+        circle.map = self.mapView;
+
+        //display map
         if(self.mapView){
             [self.viewForMap addSubview:self.mapView];
         } 
+        
+        /*
+        if(self.mapView){
+            UISearchBar *searchBar = [[UISearchBar alloc] init];
+            searchBar.backgroundColor = [UIColor yellowColor];
+            [self.mapView addSubview:searchBar];
+        }
+         */
+        
     }
 }
 
