@@ -30,9 +30,7 @@
     [self presentViewController:picker animated:YES completion:NULL];
     
     //for RESTful
-    //FirstViewController *firstView = [FirstViewController new];
-
-    //[firstView startrequest];
+    //[self startrequest];
 }
 
 

@@ -357,6 +357,8 @@
 		182DC52417D8BDF50082D6C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		182DC52B17D8BDFF0082D6C6 /* Tesseract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tesseract.h; sourceTree = "<group>"; };
 		182DC52C17D8BDFF0082D6C6 /* Tesseract.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Tesseract.mm; sourceTree = "<group>"; };
+		183CCC9817DF319A00C7D500 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/xinchen/develop-env/goout_git/isearch/goout/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
+		183CCC9917DF319A00C7D500 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "/Users/xinchen/develop-env/goout_git/isearch/goout/zh-Hans.lproj/MainStoryboard.storyboard"; sourceTree = "<absolute>"; };
 		1894AD7E17CD8E4F008A808B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		189D512617D0F11A009590AC /* process.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = process.png; sourceTree = "<group>"; };
 		189D512817D0F175009590AC /* users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = users.png; sourceTree = "<group>"; };
@@ -2278,6 +2280,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				18BF275017CCFBBD009F51A7 /* en */,
+				183CCC9817DF319A00C7D500 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2286,6 +2289,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				18BF275917CCFBBD009F51A7 /* en */,
+				183CCC9917DF319A00C7D500 /* zh-Hans */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
