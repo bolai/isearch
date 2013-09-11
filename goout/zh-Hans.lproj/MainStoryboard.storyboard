@@ -78,7 +78,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="udz-Uz-xAw">
-                                <rect key="frame" x="124" y="354" width="85" height="37"/>
+                                <rect key="frame" x="118" y="349" width="85" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="找好吃的">
@@ -113,7 +113,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TP9-7c-ZhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="5nE-MZ-ySM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设置" image="shopping-bag.png" id="DuS-Hh-vZh"/>
+                    <tabBarItem key="tabBarItem" title="我" image="shopping-bag.png" id="DuS-Hh-vZh"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="4iP-XX-MlR">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -159,7 +159,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="分享设置等" id="pbn-h1-ees"/>
+                    <navigationItem key="navigationItem" title="我" id="pbn-h1-ees"/>
                     <connections>
                         <outlet property="webView" destination="11j-g9-lac" id="FGz-YH-Ac6"/>
                     </connections>
@@ -197,7 +197,6 @@
                 <relationship kind="outlet" name="camera" candidateClass="GMSCameraPosition"/>
                 <relationship kind="outlet" name="distancelabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="mapView" candidateClass="GMSMapView"/>
-                <relationship kind="outlet" name="mapview" candidateClass="UIView"/>
                 <relationship kind="outlet" name="viewForMap" candidateClass="UIView"/>
             </relationships>
         </class>

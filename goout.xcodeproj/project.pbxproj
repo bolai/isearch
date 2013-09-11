@@ -136,6 +136,9 @@
 		18BF280917CD0655009F51A7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BF280817CD0655009F51A7 /* SystemConfiguration.framework */; };
 		18BF280B17CD0663009F51A7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BF280A17CD0663009F51A7 /* MobileCoreServices.framework */; };
 		18BF280D17CD067D009F51A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BF280C17CD067D009F51A7 /* libz.dylib */; };
+		18D002B117DFF18A0049CD66 /* 25px-Flag_of_Italy.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D002AE17DFF18A0049CD66 /* 25px-Flag_of_Italy.svg.png */; };
+		18D002B217DFF18A0049CD66 /* 200px-Spaghetti_all'_arrabbiata.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18D002AF17DFF18A0049CD66 /* 200px-Spaghetti_all'_arrabbiata.jpg */; };
+		18D002B317DFF18A0049CD66 /* italy.html in Resources */ = {isa = PBXBuildFile; fileRef = 18D002B017DFF18A0049CD66 /* italy.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -494,6 +497,9 @@
 		18BF280817CD0655009F51A7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		18BF280A17CD0663009F51A7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		18BF280C17CD067D009F51A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		18D002AE17DFF18A0049CD66 /* 25px-Flag_of_Italy.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "25px-Flag_of_Italy.svg.png"; sourceTree = "<group>"; };
+		18D002AF17DFF18A0049CD66 /* 200px-Spaghetti_all'_arrabbiata.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "200px-Spaghetti_all'_arrabbiata.jpg"; sourceTree = "<group>"; };
+		18D002B017DFF18A0049CD66 /* italy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = italy.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2016,11 +2022,14 @@
 		18BF274C17CCFBBD009F51A7 /* goout */ = {
 			isa = PBXGroup;
 			children = (
+				18D002AE17DFF18A0049CD66 /* 25px-Flag_of_Italy.svg.png */,
+				18D002AF17DFF18A0049CD66 /* 200px-Spaghetti_all'_arrabbiata.jpg */,
+				18D002B017DFF18A0049CD66 /* italy.html */,
+				189D515317D111FE009590AC /* about.html */,
+				189D515217D111FE009590AC /* about.jpg */,
 				182DC52917D8BDFF0082D6C6 /* tesseract-ios-master */,
 				182DC48D17D8BDF50082D6C6 /* tesseract-ios-lib-master */,
 				180FE2B617D26D190071DFB4 /* tessdata */,
-				189D515217D111FE009590AC /* about.jpg */,
-				189D515317D111FE009590AC /* about.html */,
 				189D513A17D0FD14009590AC /* icons */,
 				18BF275517CCFBBD009F51A7 /* AppDelegate.h */,
 				18BF275617CCFBBD009F51A7 /* AppDelegate.m */,
@@ -2192,6 +2201,9 @@
 				180A949917DC728700C705E3 /* Default@2x.png in Resources */,
 				180A949D17DC7C0500C705E3 /* Icon@2x.png in Resources */,
 				180A949F17DC7E4500C705E3 /* GoogleMaps.bundle in Resources */,
+				18D002B117DFF18A0049CD66 /* 25px-Flag_of_Italy.svg.png in Resources */,
+				18D002B217DFF18A0049CD66 /* 200px-Spaghetti_all'_arrabbiata.jpg in Resources */,
+				18D002B317DFF18A0049CD66 /* italy.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
