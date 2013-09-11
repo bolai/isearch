@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GMSMapView.h>
+#import "ELCAlbumPickerController.h"
+#import "ELCImagePickerController.h"
 
-@interface SecondViewController : UIViewController<CLLocationManagerDelegate, GMSMapViewDelegate>
+@interface SecondViewController : UIViewController<ELCAssetSelectionDelegate,ELCImagePickerControllerDelegate,CLLocationManagerDelegate, GMSMapViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *viewForMap;
 @property (nonatomic, strong) IBOutlet GMSMapView *mapView;
 @property (nonatomic, strong) IBOutlet GMSCameraPosition *camera;
@@ -18,5 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *distancelabel;
 
 - (IBAction)changesomething:(id)sender;
-
+- (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info;
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker;
 @end

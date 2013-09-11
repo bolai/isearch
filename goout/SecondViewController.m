@@ -15,12 +15,18 @@
     CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
+    CLLocation *tempCurrentLocation;
+    UIImage *choosenImgs;
     //
 }
 @synthesize viewForMap;
 @synthesize distancelabel;
 @synthesize mapView;
 @synthesize camera;
+
+- (void)selectedAssets:(NSArray *)assets{
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,6 +66,7 @@
 {
     NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
+    tempCurrentLocation = newLocation;
     
     if (currentLocation != nil) {
         NSString * x = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
@@ -77,9 +84,7 @@
                            placemark.postalCode, placemark.locality,
                            placemark.administrativeArea,
                            placemark.country];
-                
-                //NSLog(@"%@", address);
-                
+                                
             } else {
                 NSLog(@"%@", error.debugDescription);
             }
@@ -111,12 +116,9 @@
         self.mapView.delegate = self;
         
         
-        //NSLog(@"width is:%f",self.viewForMap.frame.size.width);
-        //NSLog(@"height is:%f",self.viewForMap.frame.size.height);
-        
         self.mapView.myLocationEnabled = YES;
         self.mapView.settings.myLocationButton = YES;
-        
+                
         //display marker on map
         marker.map = self.mapView;
         
@@ -134,15 +136,110 @@
             [self.viewForMap addSubview:self.mapView];
         } 
         
-        /*
-        if(self.mapView){
-            UISearchBar *searchBar = [[UISearchBar alloc] init];
-            searchBar.backgroundColor = [UIColor yellowColor];
-            [self.mapView addSubview:searchBar];
-        }
-         */
+        UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        shareButton.frame = CGRectMake(viewForMap.bounds.size.width - 70, viewForMap.bounds.size.height - 100, 60, 40);
+        shareButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+        [shareButton setTitle:@"雷锋" forState:UIControlStateNormal];
+        [shareButton setTag:1];
+        [shareButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        [viewForMap addSubview:shareButton];
+        
+        UIButton *testButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        testButton.frame = CGRectMake(viewForMap.bounds.size.width - 70, viewForMap.bounds.size.height - 160, 60, 40);
+        testButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+        [testButton setTitle:@"微信" forState:UIControlStateNormal];
+        [testButton setTag:2];
+        [testButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [viewForMap addSubview:testButton];
         
     }
+}
+
+- (void)buttonClicked:(UIButton*)button
+{
+    if ([button tag] == 1) {
+        //做雷锋
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = CLLocationCoordinate2DMake(tempCurrentLocation.coordinate.latitude, tempCurrentLocation.coordinate.longitude);
+        
+        marker.title = @"haha";
+        marker.snippet = @"haha";
+        marker.map = self.mapView;
+        
+        //alumpicker 
+        ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
+        ELCImagePickerController *imagePicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
+        [albumController setParent:imagePicker];
+        [imagePicker setDelegate:self];
+        
+        // Present modally
+        [self presentViewController:imagePicker
+                           animated:YES
+                         completion:nil];
+        
+        
+    } else if([button tag] == 2){
+        //weixin
+        
+    }
+    else{
+        NSLog(@"Button %d clicked.", [button tag]);
+    }
+}
+
+
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    NSLog(@"Button d clicked.");
+    
+
+    UIView *textAndImageView = [[UIView alloc] initWithFrame:CGRectMake(0, viewForMap.bounds.size.height - 220, viewForMap.bounds.size.width, 300)];
+    textAndImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+    [textAndImageView setTag:4];
+    textAndImageView.backgroundColor = [UIColor whiteColor];
+    
+    [viewForMap addSubview:textAndImageView];
+
+    
+    //想说点什么。。。
+    UITextView *textView = [[UITextView alloc] init];
+    textView.frame = CGRectMake(10, viewForMap.bounds.size.height - 320, viewForMap.bounds.size.width - 20, 30);
+    textView.text = @"想说点什么。。。";
+    textView.textColor = [UIColor lightGrayColor];
+    textView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+    [textView setTag:3];
+    textView.backgroundColor = [UIColor whiteColor];
+    textView.font = [UIFont fontWithName:@ "Arial" size:18.0];
+    [textView.layer setBorderWidth:1.0];
+    [textView setReturnKeyType:UIReturnKeyDone];
+    [textView resignFirstResponder];
+
+    
+    [textAndImageView addSubview:textView];
+    
+    
+    int i = 0;
+    for (id obj in info) {
+        if ([obj isKindOfClass:[NSDictionary class]]){
+            //显示多个图片
+            NSDictionary *dic = obj;
+            UIImage *chosenImage = [dic objectForKey : UIImagePickerControllerOriginalImage];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10 + i * 70, viewForMap.bounds.size.height - 280, 60, 60)];
+            imageView.contentMode = UIViewContentModeScaleToFill;
+            imageView.image = chosenImage;
+            [imageView.layer setBorderWidth:1.0];
+            [textAndImageView addSubview:imageView];
+            i++;
+        }
+    }
+}
+
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)viewDidUnload
@@ -177,6 +274,20 @@
 {
 	[super viewDidDisappear:animated];
 }
+
+- (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    NSLog(@"long press...");
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
+    
+    marker.title = @"address";
+    marker.snippet = @"test";
+    marker.animated = YES;
+    marker.map = self.mapView;
+
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
