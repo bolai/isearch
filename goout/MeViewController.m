@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.
 //
 
-#import "ThirdViewController.h"
+#import "MeViewController.h"
 
-@implementation ThirdViewController
+@implementation MeViewController
 
 @synthesize webView;
 

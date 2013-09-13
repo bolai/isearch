@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ThirdViewController : UIViewController
+@interface MeViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 

@@ -6,12 +6,13 @@
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "InterestViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <GoogleMaps/GMSMapView.h>
+#import "InterestPickerViewController.h"
 
 
-@implementation SecondViewController{
+@implementation InterestViewController{
     CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
@@ -36,21 +37,94 @@
 
 - (void)changesomething:(id)sender{
     NSLog(@"second view test....");
-    // Do any additional setup after loading the view, typically from a nib.
-    locationManager = [[CLLocationManager alloc] init];
-    geocoder = [[CLGeocoder alloc] init];
-    
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager startUpdatingLocation];
+
 
 }
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad]; 
+            
+    //创建一个右边按钮  
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"贡献"     
+                                                                            style:UIBarButtonItemStyleDone     
+                                                                           target:self     
+                                                                           action:@selector(clickRightButton)];  
+    //把按钮添加入导航栏集合中  
+    [self.navigationItem setRightBarButtonItem:rightButton]; 
+    
+    locationManager = [[CLLocationManager alloc] init];
+    geocoder = [[CLGeocoder alloc] init];
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
 }
+
+-(void)clickRightButton  
+{  
+    NSLog(@"点击了导航栏右边按钮");  
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                        initWithTitle:nil
+                        delegate:self
+                        cancelButtonTitle:@"取消"
+                        destructiveButtonTitle:nil
+                        otherButtonTitles: @"拍照", @"从手机相册选择",nil]; 
+    
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+}  
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+        //呼出的菜单按钮点击后的响应
+      if (buttonIndex == actionSheet.cancelButtonIndex)
+      {
+         NSLog(@"取消");
+         return;
+      }
+    	 
+    switch (buttonIndex)
+    {
+       case 0:  //打开照相机拍照
+       [self takePhoto];
+        break;
+        	 
+        case 1:  //打开本地相册
+        [self AlbumPicker];
+         break;
+    }
+}
+
+- (void)takePhoto{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void)AlbumPicker
+{
+    //做雷锋
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(tempCurrentLocation.coordinate.latitude, tempCurrentLocation.coordinate.longitude);
+    
+    marker.title = @"haha";
+    marker.snippet = @"haha";
+    marker.map = self.mapView;
+    
+    //alumpicker 
+    ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
+    ELCImagePickerController *imagePicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
+    [albumController setParent:imagePicker];
+    [imagePicker setDelegate:self];
+    
+    //Present modally
+    [self presentViewController:imagePicker
+                      animated:YES
+                    completion:nil];
+}
+                                                                       
 
 #pragma mark - CLLocationManagerDelegate
 
@@ -69,11 +143,11 @@
     tempCurrentLocation = newLocation;
     
     if (currentLocation != nil) {
-        NSString * x = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        NSString * y = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        //NSString * x = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+        //NSString * y = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
         
         // Reverse Geocoding
-        NSLog(@"Resolving the Address");
+        //Resolving the Address
         NSString static * address;
         [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
             NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
@@ -90,13 +164,11 @@
             }
         } ];
         
-        
-        NSLog(@"%@",x);
-        NSLog(@"%@",y);
+        //NSLog(@"%@",x);
+        //NSLog(@"%@",y);
         NSLog(@"address is %@", address);
         
         [locationManager stopUpdatingLocation];
-        
         
         
         GMSMarker *marker = [[GMSMarker alloc] init];
@@ -135,7 +207,7 @@
         if(self.mapView){
             [self.viewForMap addSubview:self.mapView];
         } 
-        
+        /*
         UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         shareButton.frame = CGRectMake(viewForMap.bounds.size.width - 70, viewForMap.bounds.size.height - 100, 60, 40);
         shareButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
@@ -143,18 +215,17 @@
         [shareButton setTag:1];
         [shareButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
-        
         [viewForMap addSubview:shareButton];
         
         UIButton *testButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         testButton.frame = CGRectMake(viewForMap.bounds.size.width - 70, viewForMap.bounds.size.height - 160, 60, 40);
         testButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-        [testButton setTitle:@"微信" forState:UIControlStateNormal];
+        [testButton setTitle:@"test" forState:UIControlStateNormal];
         [testButton setTag:2];
         [testButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         [viewForMap addSubview:testButton];
-        
+         */
     }
 }
 
@@ -169,72 +240,38 @@
         marker.snippet = @"haha";
         marker.map = self.mapView;
         
-        //alumpicker 
-        ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
-        ELCImagePickerController *imagePicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
-        [albumController setParent:imagePicker];
-        [imagePicker setDelegate:self];
-        
-        // Present modally
-        [self presentViewController:imagePicker
-                           animated:YES
-                         completion:nil];
-        
-        
     } else if([button tag] == 2){
         //weixin
-        
     }
     else{
         NSLog(@"Button %d clicked.", [button tag]);
     }
 }
 
-
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info{
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    NSLog(@"Button d clicked.");
     
+    [self pushPickerView:info];
+ }
 
-    UIView *textAndImageView = [[UIView alloc] initWithFrame:CGRectMake(0, viewForMap.bounds.size.height - 220, viewForMap.bounds.size.width, 300)];
-    textAndImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-    [textAndImageView setTag:4];
-    textAndImageView.backgroundColor = [UIColor whiteColor];
-    
-    [viewForMap addSubview:textAndImageView];
+//after take photo
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    NSArray *array = [NSArray arrayWithObject:info];
+    [self pushPickerView:array];
+}
 
+- (void)pushPickerView:(NSArray *)info{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    InterestPickerViewController *ipc = [storyboard instantiateViewControllerWithIdentifier:@"InterestPickerViewController"];
+    [self.navigationController pushViewController:ipc animated:YES];
     
-    //想说点什么。。。
-    UITextView *textView = [[UITextView alloc] init];
-    textView.frame = CGRectMake(10, viewForMap.bounds.size.height - 320, viewForMap.bounds.size.width - 20, 30);
-    textView.text = @"想说点什么。。。";
-    textView.textColor = [UIColor lightGrayColor];
-    textView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-    [textView setTag:3];
-    textView.backgroundColor = [UIColor whiteColor];
-    textView.font = [UIFont fontWithName:@ "Arial" size:18.0];
-    [textView.layer setBorderWidth:1.0];
-    [textView setReturnKeyType:UIReturnKeyDone];
-    [textView resignFirstResponder];
+    //handle image in InterestPickerViewController
+    [ipc handleImage:info];
+}
 
-    
-    [textAndImageView addSubview:textView];
-    
-    
-    int i = 0;
-    for (id obj in info) {
-        if ([obj isKindOfClass:[NSDictionary class]]){
-            //显示多个图片
-            NSDictionary *dic = obj;
-            UIImage *chosenImage = [dic objectForKey : UIImagePickerControllerOriginalImage];
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10 + i * 70, viewForMap.bounds.size.height - 280, 60, 60)];
-            imageView.contentMode = UIViewContentModeScaleToFill;
-            imageView.image = chosenImage;
-            [imageView.layer setBorderWidth:1.0];
-            [textAndImageView addSubview:imageView];
-            i++;
-        }
-    }
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -287,7 +324,6 @@
     marker.map = self.mapView;
 
 }
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

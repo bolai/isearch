@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-@interface FirstViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface MenuViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *ourcameraimage;
 

@@ -13,7 +13,7 @@
 #import "ELCAlbumPickerController.h"
 #import "ELCImagePickerController.h"
 
-@interface SecondViewController : UIViewController<ELCAssetSelectionDelegate,ELCImagePickerControllerDelegate,CLLocationManagerDelegate, GMSMapViewDelegate>
+@interface InterestViewController : UIViewController<ELCAssetSelectionDelegate,ELCImagePickerControllerDelegate,CLLocationManagerDelegate,GMSMapViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *viewForMap;
 @property (nonatomic, strong) IBOutlet GMSMapView *mapView;
 @property (nonatomic, strong) IBOutlet GMSCameraPosition *camera;
@@ -24,4 +24,8 @@
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate;
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info;
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker;
+- (void)AlbumPicker;
+- (void)takePhoto;
+- (void)pushPickerView:(NSArray *)info;
+
 @end

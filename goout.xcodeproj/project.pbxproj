@@ -36,6 +36,7 @@
 		182DC52817D8BDF60082D6C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 182DC52417D8BDF50082D6C6 /* README.md */; };
 		182DC52D17D8BDFF0082D6C6 /* Tesseract.mm in Sources */ = {isa = PBXBuildFile; fileRef = 182DC52C17D8BDFF0082D6C6 /* Tesseract.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1894AD7F17CD8E4F008A808B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1894AD7E17CD8E4F008A808B /* libxml2.dylib */; };
+		1894C78B17E1EF0B00F93C06 /* InterestPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */; };
 		189D512717D0F11A009590AC /* process.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D512617D0F11A009590AC /* process.png */; };
 		189D512917D0F175009590AC /* users.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D512817D0F175009590AC /* users.png */; };
 		189D512B17D0F1A1009590AC /* prize_winner.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D512A17D0F1A1009590AC /* prize_winner.png */; };
@@ -48,7 +49,7 @@
 		189D514617D109E7009590AC /* location-pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D514517D109E7009590AC /* location-pointer.png */; };
 		189D514817D109FF009590AC /* shopping-bag.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D514717D109FF009590AC /* shopping-bag.png */; };
 		189D514A17D10A15009590AC /* suitcase.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D514917D10A15009590AC /* suitcase.png */; };
-		189D514D17D10F1F009590AC /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D514C17D10F1E009590AC /* ThirdViewController.m */; };
+		189D514D17D10F1F009590AC /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D514C17D10F1E009590AC /* MeViewController.m */; };
 		189D515417D111FE009590AC /* about.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 189D515217D111FE009590AC /* about.jpg */; };
 		189D515517D111FE009590AC /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 189D515317D111FE009590AC /* about.html */; };
 		18A28AE717D206BD00CCEBE6 /* README-GHUnit in Resources */ = {isa = PBXBuildFile; fileRef = 18A28A3F17D206BD00CCEBE6 /* README-GHUnit */; };
@@ -133,10 +134,10 @@
 		18BF275317CCFBBD009F51A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BF275217CCFBBD009F51A7 /* main.m */; };
 		18BF275717CCFBBD009F51A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BF275617CCFBBD009F51A7 /* AppDelegate.m */; };
 		18BF275A17CCFBBD009F51A7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18BF275817CCFBBD009F51A7 /* MainStoryboard.storyboard */; };
-		18BF275D17CCFBBD009F51A7 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BF275C17CCFBBD009F51A7 /* FirstViewController.m */; };
+		18BF275D17CCFBBD009F51A7 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BF275C17CCFBBD009F51A7 /* MenuViewController.m */; };
 		18BF275F17CCFBBD009F51A7 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BF275E17CCFBBD009F51A7 /* first.png */; };
 		18BF276117CCFBBD009F51A7 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BF276017CCFBBD009F51A7 /* first@2x.png */; };
-		18BF276417CCFBBD009F51A7 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BF276317CCFBBD009F51A7 /* SecondViewController.m */; };
+		18BF276417CCFBBD009F51A7 /* InterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BF276317CCFBBD009F51A7 /* InterestViewController.m */; };
 		18BF276617CCFBBD009F51A7 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BF276517CCFBBD009F51A7 /* second.png */; };
 		18BF276817CCFBBD009F51A7 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BF276717CCFBBD009F51A7 /* second@2x.png */; };
 		18BF277017CCFBBE009F51A7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BF276F17CCFBBE009F51A7 /* SenTestingKit.framework */; };
@@ -373,6 +374,8 @@
 		183CCC9817DF319A00C7D500 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/xinchen/develop-env/goout_git/isearch/goout/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 		183CCC9917DF319A00C7D500 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "/Users/xinchen/develop-env/goout_git/isearch/goout/zh-Hans.lproj/MainStoryboard.storyboard"; sourceTree = "<absolute>"; };
 		1894AD7E17CD8E4F008A808B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		1894C78917E1EF0B00F93C06 /* InterestPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestPickerViewController.h; sourceTree = "<group>"; };
+		1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestPickerViewController.m; sourceTree = "<group>"; };
 		189D512617D0F11A009590AC /* process.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = process.png; sourceTree = "<group>"; };
 		189D512817D0F175009590AC /* users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = users.png; sourceTree = "<group>"; };
 		189D512A17D0F1A1009590AC /* prize_winner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prize_winner.png; sourceTree = "<group>"; };
@@ -385,8 +388,8 @@
 		189D514517D109E7009590AC /* location-pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-pointer.png"; sourceTree = "<group>"; };
 		189D514717D109FF009590AC /* shopping-bag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopping-bag.png"; sourceTree = "<group>"; };
 		189D514917D10A15009590AC /* suitcase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suitcase.png; sourceTree = "<group>"; };
-		189D514B17D10F1E009590AC /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
-		189D514C17D10F1E009590AC /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
+		189D514B17D10F1E009590AC /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
+		189D514C17D10F1E009590AC /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		189D515217D111FE009590AC /* about.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = about.jpg; sourceTree = "<group>"; };
 		189D515317D111FE009590AC /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		18A28A3F17D206BD00CCEBE6 /* README-GHUnit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README-GHUnit"; sourceTree = "<group>"; };
@@ -509,12 +512,12 @@
 		18BF275517CCFBBD009F51A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18BF275617CCFBBD009F51A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		18BF275917CCFBBD009F51A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		18BF275B17CCFBBD009F51A7 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		18BF275C17CCFBBD009F51A7 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		18BF275B17CCFBBD009F51A7 /* MenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		18BF275C17CCFBBD009F51A7 /* MenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		18BF275E17CCFBBD009F51A7 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		18BF276017CCFBBD009F51A7 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		18BF276217CCFBBD009F51A7 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		18BF276317CCFBBD009F51A7 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		18BF276217CCFBBD009F51A7 /* InterestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterestViewController.h; sourceTree = "<group>"; };
+		18BF276317CCFBBD009F51A7 /* InterestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterestViewController.m; sourceTree = "<group>"; };
 		18BF276517CCFBBD009F51A7 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		18BF276717CCFBBD009F51A7 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		18BF276E17CCFBBE009F51A7 /* gooutTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gooutTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2095,12 +2098,14 @@
 				18BF275517CCFBBD009F51A7 /* AppDelegate.h */,
 				18BF275617CCFBBD009F51A7 /* AppDelegate.m */,
 				18BF275817CCFBBD009F51A7 /* MainStoryboard.storyboard */,
-				18BF275B17CCFBBD009F51A7 /* FirstViewController.h */,
-				18BF275C17CCFBBD009F51A7 /* FirstViewController.m */,
-				18BF276217CCFBBD009F51A7 /* SecondViewController.h */,
-				18BF276317CCFBBD009F51A7 /* SecondViewController.m */,
-				189D514B17D10F1E009590AC /* ThirdViewController.h */,
-				189D514C17D10F1E009590AC /* ThirdViewController.m */,
+				18BF275B17CCFBBD009F51A7 /* MenuViewController.h */,
+				18BF275C17CCFBBD009F51A7 /* MenuViewController.m */,
+				18BF276217CCFBBD009F51A7 /* InterestViewController.h */,
+				18BF276317CCFBBD009F51A7 /* InterestViewController.m */,
+				1894C78917E1EF0B00F93C06 /* InterestPickerViewController.h */,
+				1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */,
+				189D514B17D10F1E009590AC /* MeViewController.h */,
+				189D514C17D10F1E009590AC /* MeViewController.m */,
 				18BF274D17CCFBBD009F51A7 /* Supporting Files */,
 			);
 			path = goout;
@@ -2302,9 +2307,9 @@
 			files = (
 				18BF275317CCFBBD009F51A7 /* main.m in Sources */,
 				18BF275717CCFBBD009F51A7 /* AppDelegate.m in Sources */,
-				18BF275D17CCFBBD009F51A7 /* FirstViewController.m in Sources */,
-				18BF276417CCFBBD009F51A7 /* SecondViewController.m in Sources */,
-				189D514D17D10F1F009590AC /* ThirdViewController.m in Sources */,
+				18BF275D17CCFBBD009F51A7 /* MenuViewController.m in Sources */,
+				18BF276417CCFBBD009F51A7 /* InterestViewController.m in Sources */,
+				189D514D17D10F1F009590AC /* MeViewController.m in Sources */,
 				18A28B1117D206BD00CCEBE6 /* Reachability.m in Sources */,
 				18A28B6917D20A2D00CCEBE6 /* ASIAuthenticationDialog.m in Sources */,
 				18A28B6A17D20A2D00CCEBE6 /* ASIDataCompressor.m in Sources */,
@@ -2335,6 +2340,7 @@
 				18B673FA17E0872C0023D23E /* ELCAssetCell.m in Sources */,
 				18B673FB17E0872C0023D23E /* ELCAssetTablePicker.m in Sources */,
 				18B673FC17E0872C0023D23E /* ELCImagePickerController.m in Sources */,
+				1894C78B17E1EF0B00F93C06 /* InterestPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

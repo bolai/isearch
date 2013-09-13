@@ -6,11 +6,11 @@
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "MenuViewController.h"
 #import "ASIHTTPRequest.h"
 #import "Tesseract.h"
 
-@implementation FirstViewController
+@implementation MenuViewController
 
 @synthesize ourcameraimage = _ourcameraimage;
 @synthesize firstbutton = _firstbutton;
