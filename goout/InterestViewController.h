@@ -14,6 +14,7 @@
 #import "ELCImagePickerController.h"
 
 @interface InterestViewController : UIViewController<ELCAssetSelectionDelegate,ELCImagePickerControllerDelegate,CLLocationManagerDelegate,GMSMapViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UITextViewDelegate>
+
 @property (strong, nonatomic) IBOutlet UIView *viewForMap;
 @property (nonatomic, strong) IBOutlet GMSMapView *mapView;
 @property (nonatomic, strong) IBOutlet GMSCameraPosition *camera;

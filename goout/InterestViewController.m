@@ -105,14 +105,6 @@
 
 - (void)AlbumPicker
 {
-    //做雷锋
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(tempCurrentLocation.coordinate.latitude, tempCurrentLocation.coordinate.longitude);
-    
-    marker.title = @"haha";
-    marker.snippet = @"haha";
-    marker.map = self.mapView;
-    
     //alumpicker 
     ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
     ELCImagePickerController *imagePicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
@@ -143,45 +135,50 @@
     tempCurrentLocation = newLocation;
     
     if (currentLocation != nil) {
-        //NSString * x = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        //NSString * y = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
-        
-        // Reverse Geocoding
-        //Resolving the Address
-        NSString static * address;
-        [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-            NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
-            if (error == nil && [placemarks count] > 0) {
-                placemark = [placemarks lastObject];
-                address = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-                           placemark.subThoroughfare, placemark.thoroughfare,
-                           placemark.postalCode, placemark.locality,
-                           placemark.administrativeArea,
-                           placemark.country];
-                                
-            } else {
-                NSLog(@"%@", error.debugDescription);
-            }
-        } ];
-        
-        //NSLog(@"%@",x);
-        //NSLog(@"%@",y);
-        NSLog(@"address is %@", address);
-        
+
         [locationManager stopUpdatingLocation];
         
+        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+        NSString *comments = [defaults objectForKey:@"comments"];
+        NSData *imagesInfo = [defaults dataForKey:@"imagesInfo"];
+        NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:imagesInfo];
+        GMSMarker *marker;
+        if ([array count] > 0) {
+            NSString *sAddress = [defaults objectForKey:@"address"];
+            //NSString *sAddress = [[NSString alloc] initWithData:dAddress  encoding:NSUTF8StringEncoding];
         
-        GMSMarker *marker = [[GMSMarker alloc] init];
-        //test
-        marker.position = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude - 0.1, currentLocation.coordinate.longitude - 0.1);
+            double dLatitude = [defaults doubleForKey:@"latitude"];
+            //NSString *sLatitude = [[NSString alloc] initWithData:dLatitude  encoding:NSUTF8StringEncoding];
+            //double fLatitude = [sLatitude doubleValue];
+            
+            
+            double dLongitude = [defaults doubleForKey:@"longitude"];
+            //NSString *sLongitude = [[NSString alloc] initWithData:dLongitude  encoding:NSUTF8StringEncoding];
+            //double fLongitude = [sLongitude doubleValue];
+            
+            marker = [[GMSMarker alloc] init];
+            //test
+            marker.position = CLLocationCoordinate2DMake(dLatitude, dLongitude);
+            NSLog(@"lat  %f", dLatitude);
+            NSLog(@"long  %f", dLongitude);
+            NSLog(@"comments  %@", comments);
+            NSLog(@"adress  %@", sAddress);
+
+            marker.title = comments;
+            marker.snippet = sAddress;
+            marker.infoWindowAnchor = CGPointMake(0.5, 0.5);
+            //marker.icon = [UIImage imageNamed:@"users.png"];
+
+        }
         
-        marker.title = @"1888 Ice Cream";
-        marker.snippet = address;
+        
+        /*
         CLLocation* dist=[[CLLocation alloc] initWithLatitude:marker.position.latitude longitude:marker.position.longitude];  
         CLLocationDistance meters=[currentLocation distanceFromLocation:dist];
         
         NSLog(@"distance is:%f",meters);
         self.distancelabel.text = [NSString stringWithFormat:@"distance %.0f meters", meters];
+         */
         
         camera = [GMSCameraPosition cameraWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude zoom:10];
         self.mapView = [GMSMapView mapWithFrame:self.viewForMap.bounds camera:camera];
@@ -191,9 +188,11 @@
         self.mapView.myLocationEnabled = YES;
         self.mapView.settings.myLocationButton = YES;
                 
-        //display marker on map
-        marker.map = self.mapView;
         
+        //display marker on map
+        if(marker){
+            marker.map = self.mapView;
+        }
         //circle
         CLLocationCoordinate2D circleCenter = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
         GMSCircle *circle = [GMSCircle circleWithPosition:circleCenter radius:10000]; //1000 meters
@@ -264,10 +263,28 @@
 - (void)pushPickerView:(NSArray *)info{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     InterestPickerViewController *ipc = [storyboard instantiateViewControllerWithIdentifier:@"InterestPickerViewController"];
+    NSString static * address;
+    [geocoder reverseGeocodeLocation:tempCurrentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        if (error == nil && [placemarks count] > 0) {
+            placemark = [placemarks lastObject];
+            address = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+                       placemark.subThoroughfare, placemark.thoroughfare,
+                       placemark.postalCode, placemark.locality,
+                       placemark.administrativeArea,
+                       placemark.country];
+            
+        } else {
+            NSLog(@"%@", error.debugDescription);
+        }
+    }];
+
+    [ipc handleImage:info address:address latitude:tempCurrentLocation.coordinate.latitude longitude: tempCurrentLocation.coordinate.longitude];
+    NSLog(@"55555 %f", tempCurrentLocation.coordinate.latitude);
+    NSLog(@"%@", address);
     [self.navigationController pushViewController:ipc animated:YES];
     
-    //handle image in InterestPickerViewController
-    [ipc handleImage:info];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
@@ -299,7 +316,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewDidAppear:animated];      
 }
 
 - (void)viewWillDisappear:(BOOL)animated
