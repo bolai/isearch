@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <GoogleMaps/GMSMapView.h>
 #import "InterestPickerViewController.h"
+#import "InterestMarkerViewController.h"
 
 
 @implementation InterestViewController{
@@ -18,6 +19,7 @@
     CLPlacemark *placemark;
     CLLocation *tempCurrentLocation;
     UIImage *choosenImgs;
+    UIView *myInfoView;
     //
 }
 @synthesize viewForMap;
@@ -145,19 +147,13 @@
         GMSMarker *marker;
         if ([array count] > 0) {
             NSString *sAddress = [defaults objectForKey:@"address"];
-            //NSString *sAddress = [[NSString alloc] initWithData:dAddress  encoding:NSUTF8StringEncoding];
         
             double dLatitude = [defaults doubleForKey:@"latitude"];
-            //NSString *sLatitude = [[NSString alloc] initWithData:dLatitude  encoding:NSUTF8StringEncoding];
-            //double fLatitude = [sLatitude doubleValue];
-            
             
             double dLongitude = [defaults doubleForKey:@"longitude"];
-            //NSString *sLongitude = [[NSString alloc] initWithData:dLongitude  encoding:NSUTF8StringEncoding];
-            //double fLongitude = [sLongitude doubleValue];
             
             marker = [[GMSMarker alloc] init];
-            //test
+            //
             marker.position = CLLocationCoordinate2DMake(dLatitude, dLongitude);
             NSLog(@"lat  %f", dLatitude);
             NSLog(@"long  %f", dLongitude);
@@ -166,9 +162,9 @@
 
             marker.title = comments;
             marker.snippet = sAddress;
-            marker.infoWindowAnchor = CGPointMake(0.5, 0.5);
+            marker.infoWindowAnchor = CGPointMake(0.44f, 0.45f);
             //marker.icon = [UIImage imageNamed:@"users.png"];
-
+            marker.userData = array;
         }
         
         
@@ -228,6 +224,67 @@
     }
 }
 
+-(UIView *)mapView:(GMSMapView *) aMapView markerInfoWindow:(GMSMarker*) marker
+{
+    myInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 64)];
+    myInfoView.backgroundColor = [UIColor whiteColor];
+    myInfoView.layer.cornerRadius = 6;
+    myInfoView.layer.borderWidth = 6;//设置边框的宽度
+    myInfoView.layer.borderColor = [[UIColor whiteColor] CGColor];//设置边框的颜色,增加立体感
+    myInfoView.layer.masksToBounds = YES;
+    
+    UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 2, 60, 60)];
+    //myImageView.transform = CGAffineTransformMakeRotation(5.0);
+    
+    NSArray *imageInfos = marker.userData;
+
+    for (id obj in imageInfos) {
+        if ([obj isKindOfClass:[NSDictionary class]]){
+            
+            NSDictionary *dic = obj;
+            UIImage *image = [dic objectForKey : UIImagePickerControllerOriginalImage];
+            //显示一个图片
+            myImageView.image = image;
+
+            break;
+        }
+
+    }
+
+    [myInfoView addSubview:myImageView];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(62, 2, 100, 20)];
+    title.textColor = [UIColor blueColor];
+    title.text = marker.title;
+    title.font = [UIFont systemFontOfSize:14];    
+    UILabel *desc = [[UILabel alloc] initWithFrame:CGRectMake(62, 24, 100, 40)];
+    desc.numberOfLines = 2; 
+    desc.text = marker.snippet;
+    desc.font = [UIFont systemFontOfSize:12];
+    
+    [myInfoView addSubview:myImageView];
+    [myInfoView addSubview:title];
+    [myInfoView addSubview:desc];
+    
+    UIImageView *linkToOtherView = [[UIImageView alloc] initWithFrame:CGRectMake(178, 40, 20, 20)];
+    linkToOtherView.image = [UIImage imageNamed:@"next_icon.png"];
+    
+    [myInfoView addSubview:linkToOtherView];
+    
+
+    return myInfoView;
+}
+
+- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    InterestMarkerViewController *imc = [storyboard instantiateViewControllerWithIdentifier:@"InterestMarkerViewController"];
+    
+    [imc handelTitle:marker.title desc:marker.snippet address:[self currentAddress] imageInfos:marker.userData];
+    
+    [self.navigationController pushViewController:imc animated:YES];
+}
+
 - (void)buttonClicked:(UIButton*)button
 {
     if ([button tag] == 1) {
@@ -263,28 +320,55 @@
 - (void)pushPickerView:(NSArray *)info{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     InterestPickerViewController *ipc = [storyboard instantiateViewControllerWithIdentifier:@"InterestPickerViewController"];
+
+    NSString *currentAddress = [self currentAddress];
+    [ipc handleImage:info address:currentAddress latitude:tempCurrentLocation.coordinate.latitude longitude: tempCurrentLocation.coordinate.longitude];
+    NSLog(@"55555 %f", tempCurrentLocation.coordinate.latitude);
+    NSLog(@"%@", currentAddress);
+    [self.navigationController pushViewController:ipc animated:YES];
+}
+
+- (NSString *)currentAddress{
     NSString static * address;
     [geocoder reverseGeocodeLocation:tempCurrentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
-            address = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-                       placemark.subThoroughfare, placemark.thoroughfare,
-                       placemark.postalCode, placemark.locality,
-                       placemark.administrativeArea,
-                       placemark.country];
+            NSString * subThoroughfare = placemark.subThoroughfare;
+            if (subThoroughfare == NULL) {
+                subThoroughfare = @" ";
+            }
+            NSString * thoroughfare = placemark.thoroughfare;
+            if (thoroughfare == NULL) {
+                thoroughfare = @" ";
+            }
+            NSString * postalCode = placemark.postalCode;
+            if (postalCode == NULL) {
+                postalCode = @" ";
+            }
+            NSString * locality = placemark.locality;
+            if (locality == NULL) {
+                locality = @" ";
+            }
+            NSString * administrativeArea = placemark.administrativeArea;
+            if (administrativeArea == NULL) {
+                administrativeArea = @" ";
+            }
+            NSString * country = placemark.country;
+            if (country == NULL) {
+                country = @" ";
+            }
+            address = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@",
+                       subThoroughfare, thoroughfare,
+                       postalCode, locality,
+                       administrativeArea,
+                       country];
             
         } else {
             NSLog(@"%@", error.debugDescription);
         }
     }];
-
-    [ipc handleImage:info address:address latitude:tempCurrentLocation.coordinate.latitude longitude: tempCurrentLocation.coordinate.longitude];
-    NSLog(@"55555 %f", tempCurrentLocation.coordinate.latitude);
-    NSLog(@"%@", address);
-    [self.navigationController pushViewController:ipc animated:YES];
-    
-
+    return address;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{

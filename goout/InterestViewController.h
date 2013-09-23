@@ -28,5 +28,6 @@
 - (void)AlbumPicker;
 - (void)takePhoto;
 - (void)pushPickerView:(NSArray *)info;
+- (NSString *)currentAddress;
 
 @end

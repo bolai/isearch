@@ -35,8 +35,16 @@
 		182DC52717D8BDF60082D6C6 /* libtesseract_all.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 182DC52317D8BDF50082D6C6 /* libtesseract_all.a */; };
 		182DC52817D8BDF60082D6C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 182DC52417D8BDF50082D6C6 /* README.md */; };
 		182DC52D17D8BDFF0082D6C6 /* Tesseract.mm in Sources */ = {isa = PBXBuildFile; fileRef = 182DC52C17D8BDFF0082D6C6 /* Tesseract.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1876312617E97C8D00BFE36E /* InterestMarkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876312517E97C8D00BFE36E /* InterestMarkerViewController.m */; };
 		1894AD7F17CD8E4F008A808B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1894AD7E17CD8E4F008A808B /* libxml2.dylib */; };
 		1894C78B17E1EF0B00F93C06 /* InterestPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */; };
+		189BA72117E7134300246548 /* next_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 189BA72017E7134300246548 /* next_icon.png */; };
+		189C75B617EAAB6600358E73 /* FGalleryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C75AE17EAAB6600358E73 /* FGalleryPhoto.m */; };
+		189C75B717EAAB6600358E73 /* FGalleryPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C75B017EAAB6600358E73 /* FGalleryPhotoView.m */; };
+		189C75B817EAAB6600358E73 /* FGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C75B217EAAB6600358E73 /* FGalleryViewController.m */; };
+		189C75C017ED219900358E73 /* audi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 189C75BD17ED219900358E73 /* audi.jpg */; };
+		189C75C117ED219900358E73 /* hawaii.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 189C75BE17ED219900358E73 /* hawaii.jpeg */; };
+		189C75C217ED219900358E73 /* lava.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 189C75BF17ED219900358E73 /* lava.jpeg */; };
 		189D512717D0F11A009590AC /* process.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D512617D0F11A009590AC /* process.png */; };
 		189D512917D0F175009590AC /* users.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D512817D0F175009590AC /* users.png */; };
 		189D512B17D0F1A1009590AC /* prize_winner.png in Resources */ = {isa = PBXBuildFile; fileRef = 189D512A17D0F1A1009590AC /* prize_winner.png */; };
@@ -373,9 +381,21 @@
 		182DC52C17D8BDFF0082D6C6 /* Tesseract.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Tesseract.mm; sourceTree = "<group>"; };
 		183CCC9817DF319A00C7D500 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/xinchen/develop-env/goout_git/isearch/goout/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 		183CCC9917DF319A00C7D500 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "/Users/xinchen/develop-env/goout_git/isearch/goout/zh-Hans.lproj/MainStoryboard.storyboard"; sourceTree = "<absolute>"; };
+		1876312417E97C8D00BFE36E /* InterestMarkerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestMarkerViewController.h; sourceTree = "<group>"; };
+		1876312517E97C8D00BFE36E /* InterestMarkerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestMarkerViewController.m; sourceTree = "<group>"; };
 		1894AD7E17CD8E4F008A808B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		1894C78917E1EF0B00F93C06 /* InterestPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestPickerViewController.h; sourceTree = "<group>"; };
 		1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestPickerViewController.m; sourceTree = "<group>"; };
+		189BA72017E7134300246548 /* next_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_icon.png; sourceTree = "<group>"; };
+		189C75AD17EAAB6600358E73 /* FGalleryPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGalleryPhoto.h; sourceTree = "<group>"; };
+		189C75AE17EAAB6600358E73 /* FGalleryPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGalleryPhoto.m; sourceTree = "<group>"; };
+		189C75AF17EAAB6600358E73 /* FGalleryPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGalleryPhotoView.h; sourceTree = "<group>"; };
+		189C75B017EAAB6600358E73 /* FGalleryPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGalleryPhotoView.m; sourceTree = "<group>"; };
+		189C75B117EAAB6600358E73 /* FGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGalleryViewController.h; sourceTree = "<group>"; };
+		189C75B217EAAB6600358E73 /* FGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGalleryViewController.m; sourceTree = "<group>"; };
+		189C75BD17ED219900358E73 /* audi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = audi.jpg; sourceTree = "<group>"; };
+		189C75BE17ED219900358E73 /* hawaii.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hawaii.jpeg; sourceTree = "<group>"; };
+		189C75BF17ED219900358E73 /* lava.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lava.jpeg; sourceTree = "<group>"; };
 		189D512617D0F11A009590AC /* process.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = process.png; sourceTree = "<group>"; };
 		189D512817D0F175009590AC /* users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = users.png; sourceTree = "<group>"; };
 		189D512A17D0F1A1009590AC /* prize_winner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prize_winner.png; sourceTree = "<group>"; };
@@ -846,9 +866,26 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		189C75A917EAAB4E00358E73 /* Gallary */ = {
+			isa = PBXGroup;
+			children = (
+				189C75AD17EAAB6600358E73 /* FGalleryPhoto.h */,
+				189C75AE17EAAB6600358E73 /* FGalleryPhoto.m */,
+				189C75AF17EAAB6600358E73 /* FGalleryPhotoView.h */,
+				189C75B017EAAB6600358E73 /* FGalleryPhotoView.m */,
+				189C75B117EAAB6600358E73 /* FGalleryViewController.h */,
+				189C75B217EAAB6600358E73 /* FGalleryViewController.m */,
+			);
+			name = Gallary;
+			sourceTree = "<group>";
+		};
 		189D513A17D0FD14009590AC /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				189C75BD17ED219900358E73 /* audi.jpg */,
+				189C75BE17ED219900358E73 /* hawaii.jpeg */,
+				189C75BF17ED219900358E73 /* lava.jpeg */,
+				189BA72017E7134300246548 /* next_icon.png */,
 				180A949C17DC7C0500C705E3 /* Icon@2x.png */,
 				180A949817DC728700C705E3 /* Default@2x.png */,
 				189D514917D10A15009590AC /* suitcase.png */,
@@ -2033,6 +2070,7 @@
 		18BF273717CCFBBD009F51A7 = {
 			isa = PBXGroup;
 			children = (
+				189C75A917EAAB4E00358E73 /* Gallary */,
 				18B673E617E0872C0023D23E /* ELCImagePicker */,
 				180DF6D817D5D09200ABB860 /* GoogleMap */,
 				18A28B1617D20A2D00CCEBE6 /* Classes */,
@@ -2104,6 +2142,8 @@
 				18BF276317CCFBBD009F51A7 /* InterestViewController.m */,
 				1894C78917E1EF0B00F93C06 /* InterestPickerViewController.h */,
 				1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */,
+				1876312417E97C8D00BFE36E /* InterestMarkerViewController.h */,
+				1876312517E97C8D00BFE36E /* InterestMarkerViewController.m */,
 				189D514B17D10F1E009590AC /* MeViewController.h */,
 				189D514C17D10F1E009590AC /* MeViewController.m */,
 				18BF274D17CCFBBD009F51A7 /* Supporting Files */,
@@ -2272,6 +2312,10 @@
 				18D002B317DFF18A0049CD66 /* italy.html in Resources */,
 				18B6740017E0872C0023D23E /* Overlay.png in Resources */,
 				18B6740117E0872C0023D23E /* Overlay@2x.png in Resources */,
+				189BA72117E7134300246548 /* next_icon.png in Resources */,
+				189C75C017ED219900358E73 /* audi.jpg in Resources */,
+				189C75C117ED219900358E73 /* hawaii.jpeg in Resources */,
+				189C75C217ED219900358E73 /* lava.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2341,6 +2385,10 @@
 				18B673FB17E0872C0023D23E /* ELCAssetTablePicker.m in Sources */,
 				18B673FC17E0872C0023D23E /* ELCImagePickerController.m in Sources */,
 				1894C78B17E1EF0B00F93C06 /* InterestPickerViewController.m in Sources */,
+				1876312617E97C8D00BFE36E /* InterestMarkerViewController.m in Sources */,
+				189C75B617EAAB6600358E73 /* FGalleryPhoto.m in Sources */,
+				189C75B717EAAB6600358E73 /* FGalleryPhotoView.m in Sources */,
+				189C75B817EAAB6600358E73 /* FGalleryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
