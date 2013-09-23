@@ -6,9 +6,13 @@
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "MenuViewController.h"
 #import "ASIHTTPRequest.h"
 #import "Tesseract.h"
+#import "DishesDefinitionReader.h"
+#import "SimilarSearcher.h"
+#import "ScoredDoc.h"
 
 @implementation MenuViewController
 
@@ -68,9 +72,25 @@
     
     NSString * recogText = [tesseract recognizedText];
     NSLog(@"test..: %@",recogText);
+    recogText = @"pork";
     self.ourtext.text = recogText;
     [tesseract clear];
     
+    
+    NSString * file = @"menu.cn.v0.0.1";
+    DishesDefinitionReader *reader = [[DishesDefinitionReader alloc] initWithFilePath:file];
+    [reader readDishDefinitions];
+    NSMutableArray *dishList = [reader dishesList];
+    SimilarSearcher *ss = [[SimilarSearcher alloc] initWithDishes:dishList similarResultNum:5];
+    //NSString *target = @"麻婆豆腐";
+    NSString *target = recogText;
+    NSMutableArray *sdList = [ss searchSimilar:target];
+    //NSLog(@"Search the dish: %@", target);
+    // insert code here...
+    for (int i=0; i<[sdList count]; i++) {
+        ScoredDoc *sd = [sdList objectAtIndex:i];
+        NSLog(@"The top %i dish is: %@, with the similarity %i", i, [[sd dish] dishName], [sd score]);
+    }
 }
 
 

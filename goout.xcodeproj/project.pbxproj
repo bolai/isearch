@@ -36,6 +36,13 @@
 		182DC52817D8BDF60082D6C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 182DC52417D8BDF50082D6C6 /* README.md */; };
 		182DC52D17D8BDFF0082D6C6 /* Tesseract.mm in Sources */ = {isa = PBXBuildFile; fileRef = 182DC52C17D8BDFF0082D6C6 /* Tesseract.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1876312617E97C8D00BFE36E /* InterestMarkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876312517E97C8D00BFE36E /* InterestMarkerViewController.m */; };
+		188CF36117F0750A000842CA /* DBAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CF35417F0750A000842CA /* DBAccess.m */; };
+		188CF36217F0750A000842CA /* Dish.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CF35617F0750A000842CA /* Dish.m */; };
+		188CF36317F0750A000842CA /* DishesDefinitionReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CF35817F0750A000842CA /* DishesDefinitionReader.m */; };
+		188CF36517F0750A000842CA /* menu.cn.v0.0.1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 188CF35A17F0750A000842CA /* menu.cn.v0.0.1.plist */; };
+		188CF36617F0750A000842CA /* ScoredDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CF35C17F0750A000842CA /* ScoredDoc.m */; };
+		188CF36717F0750A000842CA /* searcher.1 in Resources */ = {isa = PBXBuildFile; fileRef = 188CF35E17F0750A000842CA /* searcher.1 */; };
+		188CF36817F0750A000842CA /* SimilarSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CF36017F0750A000842CA /* SimilarSearcher.m */; };
 		1894AD7F17CD8E4F008A808B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1894AD7E17CD8E4F008A808B /* libxml2.dylib */; };
 		1894C78B17E1EF0B00F93C06 /* InterestPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */; };
 		189BA72117E7134300246548 /* next_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 189BA72017E7134300246548 /* next_icon.png */; };
@@ -383,6 +390,19 @@
 		183CCC9917DF319A00C7D500 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "/Users/xinchen/develop-env/goout_git/isearch/goout/zh-Hans.lproj/MainStoryboard.storyboard"; sourceTree = "<absolute>"; };
 		1876312417E97C8D00BFE36E /* InterestMarkerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestMarkerViewController.h; sourceTree = "<group>"; };
 		1876312517E97C8D00BFE36E /* InterestMarkerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestMarkerViewController.m; sourceTree = "<group>"; };
+		188CF35317F0750A000842CA /* DBAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAccess.h; sourceTree = "<group>"; };
+		188CF35417F0750A000842CA /* DBAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAccess.m; sourceTree = "<group>"; };
+		188CF35517F0750A000842CA /* Dish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dish.h; sourceTree = "<group>"; };
+		188CF35617F0750A000842CA /* Dish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dish.m; sourceTree = "<group>"; };
+		188CF35717F0750A000842CA /* DishesDefinitionReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishesDefinitionReader.h; sourceTree = "<group>"; };
+		188CF35817F0750A000842CA /* DishesDefinitionReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishesDefinitionReader.m; sourceTree = "<group>"; };
+		188CF35A17F0750A000842CA /* menu.cn.v0.0.1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = menu.cn.v0.0.1.plist; sourceTree = "<group>"; };
+		188CF35B17F0750A000842CA /* ScoredDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoredDoc.h; sourceTree = "<group>"; };
+		188CF35C17F0750A000842CA /* ScoredDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoredDoc.m; sourceTree = "<group>"; };
+		188CF35D17F0750A000842CA /* searcher-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "searcher-Prefix.pch"; sourceTree = "<group>"; };
+		188CF35E17F0750A000842CA /* searcher.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = searcher.1; sourceTree = "<group>"; };
+		188CF35F17F0750A000842CA /* SimilarSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimilarSearcher.h; sourceTree = "<group>"; };
+		188CF36017F0750A000842CA /* SimilarSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimilarSearcher.m; sourceTree = "<group>"; };
 		1894AD7E17CD8E4F008A808B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		1894C78917E1EF0B00F93C06 /* InterestPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestPickerViewController.h; sourceTree = "<group>"; };
 		1894C78A17E1EF0B00F93C06 /* InterestPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestPickerViewController.m; sourceTree = "<group>"; };
@@ -864,6 +884,26 @@
 				182DC52C17D8BDFF0082D6C6 /* Tesseract.mm */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		188CF35217F0750A000842CA /* searcher */ = {
+			isa = PBXGroup;
+			children = (
+				188CF35317F0750A000842CA /* DBAccess.h */,
+				188CF35417F0750A000842CA /* DBAccess.m */,
+				188CF35517F0750A000842CA /* Dish.h */,
+				188CF35617F0750A000842CA /* Dish.m */,
+				188CF35717F0750A000842CA /* DishesDefinitionReader.h */,
+				188CF35817F0750A000842CA /* DishesDefinitionReader.m */,
+				188CF35A17F0750A000842CA /* menu.cn.v0.0.1.plist */,
+				188CF35B17F0750A000842CA /* ScoredDoc.h */,
+				188CF35C17F0750A000842CA /* ScoredDoc.m */,
+				188CF35D17F0750A000842CA /* searcher-Prefix.pch */,
+				188CF35E17F0750A000842CA /* searcher.1 */,
+				188CF35F17F0750A000842CA /* SimilarSearcher.h */,
+				188CF36017F0750A000842CA /* SimilarSearcher.m */,
+			);
+			path = searcher;
 			sourceTree = "<group>";
 		};
 		189C75A917EAAB4E00358E73 /* Gallary */ = {
@@ -2070,6 +2110,7 @@
 		18BF273717CCFBBD009F51A7 = {
 			isa = PBXGroup;
 			children = (
+				188CF35217F0750A000842CA /* searcher */,
 				189C75A917EAAB4E00358E73 /* Gallary */,
 				18B673E617E0872C0023D23E /* ELCImagePicker */,
 				180DF6D817D5D09200ABB860 /* GoogleMap */,
@@ -2316,6 +2357,8 @@
 				189C75C017ED219900358E73 /* audi.jpg in Resources */,
 				189C75C117ED219900358E73 /* hawaii.jpeg in Resources */,
 				189C75C217ED219900358E73 /* lava.jpeg in Resources */,
+				188CF36517F0750A000842CA /* menu.cn.v0.0.1.plist in Resources */,
+				188CF36717F0750A000842CA /* searcher.1 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2389,6 +2432,11 @@
 				189C75B617EAAB6600358E73 /* FGalleryPhoto.m in Sources */,
 				189C75B717EAAB6600358E73 /* FGalleryPhotoView.m in Sources */,
 				189C75B817EAAB6600358E73 /* FGalleryViewController.m in Sources */,
+				188CF36117F0750A000842CA /* DBAccess.m in Sources */,
+				188CF36217F0750A000842CA /* Dish.m in Sources */,
+				188CF36317F0750A000842CA /* DishesDefinitionReader.m in Sources */,
+				188CF36617F0750A000842CA /* ScoredDoc.m in Sources */,
+				188CF36817F0750A000842CA /* SimilarSearcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
