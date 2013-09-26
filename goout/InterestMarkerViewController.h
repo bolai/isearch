@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FGalleryViewController.h"
 
-@interface InterestMarkerViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,FGalleryViewControllerDelegate>{
+@interface InterestMarkerViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,FGalleryViewControllerDelegate, UIActionSheetDelegate>{
     
 	NSArray *localCaptions;
     NSArray *localImages;
@@ -27,5 +27,6 @@
 
 
 - (void)handelTitle:(NSString *)title desc:(NSString *)desc address:(NSString *)address imageInfos:(NSArray *)imageInfos;
-
+- (void)addToMyFavority;
+- (void)removeFromMyFavority;
 @end

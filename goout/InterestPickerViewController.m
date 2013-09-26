@@ -29,6 +29,9 @@
 - (void)handleImage:(NSArray *)info address:(NSString *)address latitude:(double)latitude longitude:(double) longitude
 {
     imagesInfo = info;
+    if (!address) {
+        address = @"";
+    }
     myAddress = address;
     myLatitude = latitude;
     myLongitude = longitude;
@@ -128,18 +131,35 @@
     //保存数据：
     
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-    [defaults setObject:comments.text forKey:@"comments"];
+    //[defaults setObject:comments.text forKey:@"comments"];
     
     NSData *imagesData = [NSKeyedArchiver archivedDataWithRootObject:imagesInfo];
-    [defaults setObject:imagesData forKey:@"imagesInfo"];
+    //[defaults setObject:imagesData forKey:@"imagesInfo"];
     
-    [defaults setObject:myAddress forKey:@"address"];
-    [defaults setDouble:myLatitude forKey:@"latitude"];
-    [defaults setDouble:myLongitude forKey:@"longitude"];
+    //[defaults setObject:myAddress forKey:@"address"];
+    //[defaults setDouble:myLatitude forKey:@"latitude"];
+    //[defaults setDouble:myLongitude forKey:@"longitude"];
     
-    //[defaults setObject:[NSString stringWithFormat: @"%f", myLatitude] forKey:@"latitude"];
-    //[defaults setObject:[NSString stringWithFormat: @"%f", myLongitude] forKey:@"longitude"];
-
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:10];
+    [dic setObject:comments.text forKey:@"comments"];
+    [dic setObject:imagesData forKey:@"imagesInfo"];
+    [dic setObject:myAddress forKey:@"myAddress"];
+    [dic setObject:@"no" forKey:@"favorite"];
+    [dic setObject:[[NSNumber alloc]initWithDouble:myLatitude] forKey:@"latitude"];
+    [dic setObject:[[NSNumber alloc]initWithDouble:myLongitude]  forKey:@"longitude"];
+    
+    NSMutableArray *allData = [defaults objectForKey:@"allData"];
+    
+    if (!allData) {
+        allData = [[NSMutableArray alloc] initWithObjects:dic, nil];
+        [defaults setObject:allData forKey:@"allData"];
+    }
+    else{
+        allData = [allData mutableCopy];
+        [allData addObject:dic];
+        [defaults setObject:allData forKey:@"allData"];
+    }
+    
     
     [defaults synchronize];//用synchronize方法把数据持久化到standardUserDefaults数据库
     

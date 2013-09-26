@@ -82,46 +82,66 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSArray *array = [[NSArray alloc] initWithObjects:@"Tree", @"Flower",
-                      @"Grass", @"Fence", @"House", @"Table", @"Chair",
-                      @"Book", @"Swing" , nil]; 
-    self.listData = array; 
-    //cellTitle
-    cellTitle.textLabel.text = myTitle; 
-    UIImage *image = [UIImage imageNamed:@"blue.png"]; 
-    cellTitle.imageView.image = image; 
-    UIImage *highLighedImage = [UIImage imageNamed:@"yellow.png"]; 
-    cellTitle.imageView.highlightedImage = highLighedImage;
-    cellTitle.detailTextLabel.text = @"Detail Text";
-    cellTitle.textLabel.font = [UIFont boldSystemFontOfSize:50];
     
-    //cellDesc
-    cellDesc.textLabel.text = myDesc; 
-    image = [UIImage imageNamed:@"blue.png"]; 
-    cellDesc.imageView.image = image; 
-    highLighedImage = [UIImage imageNamed:@"yellow.png"]; 
-    cellDesc.imageView.highlightedImage = highLighedImage;
-    cellDesc.detailTextLabel.text = @"Detail Text";
-    cellDesc.textLabel.font = [UIFont boldSystemFontOfSize:50];
-    
-    //cellLocation
-    cellLocation.textLabel.text = myAddress; 
-    image = [UIImage imageNamed:@"blue.png"]; 
-    cellLocation.imageView.image = image; 
-    highLighedImage = [UIImage imageNamed:@"yellow.png"]; 
-    cellLocation.imageView.highlightedImage = highLighedImage;
-    cellLocation.detailTextLabel.text = @"Detail Text";
-    cellLocation.textLabel.font = [UIFont boldSystemFontOfSize:50];
-    
-    //cellImage
-    cellImage.textLabel.text = @"title"; 
-    image = [UIImage imageNamed:@"blue.png"]; 
-    cellImage.imageView.image = image; 
-    highLighedImage = [UIImage imageNamed:@"yellow.png"]; 
-    cellImage.imageView.highlightedImage = highLighedImage;
-    cellImage.detailTextLabel.text = @"Detail Text";
-    cellImage.textLabel.font = [UIFont boldSystemFontOfSize:50];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"兴趣点"     
+                                                                    style:UIBarButtonItemStyleDone     
+                                                                   target:self     
+                                                                   action:@selector(clickRightButton)];  
+    //把按钮添加入导航栏集合中  
+    [self.navigationItem setRightBarButtonItem:rightButton]; 
 
+}
+
+-(void)clickRightButton  
+{  
+    NSLog(@"点击了导航栏右边按钮");  
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:nil
+                                  delegate:self
+                                  cancelButtonTitle:@"取消"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles: @"加入我的兴趣点", @"从我的兴趣点 删除",nil]; 
+    
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+}  
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //呼出的菜单按钮点击后的响应
+    if (buttonIndex == actionSheet.cancelButtonIndex)
+    {
+        NSLog(@"取消");
+        return;
+    }
+    
+    switch (buttonIndex)
+    {
+        case 0:  //加入我的兴趣点
+            [self addToMyFavority];
+            break;
+            
+        case 1:  //从我的兴趣点 删除
+            [self removeFromMyFavority];
+            break;
+    }
+}
+- (void)change:(NSString *)value{
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];    
+    NSArray *allData = [defaults arrayForKey:@"allData"];
+    for (id obj in allData) {
+        if ([obj isKindOfClass:[NSMutableDictionary class]]){
+            NSMutableDictionary *dic = obj;
+            [dic setObject:value forKey:@"favorite"];
+        }
+    }
+    
+    [defaults synchronize];//用synchronize方法把数据持久化到standardUserDefaults数据库
+}
+- (void)addToMyFavority{
+    [self change:@"yes"];
+}
+
+- (void)removeFromMyFavority{
+  [self change:@"no"];
 }
 
 
@@ -171,10 +191,11 @@
      switch (indexPath.row) {
          case 0:
          {
-             cell.textLabel.text = @"建议"; 
+             cell.textLabel.text = @"说明"; 
              cell.detailTextLabel.text = myTitle;
              cell.detailTextLabel.numberOfLines = 3;
              cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+             cell.textLabel.textColor = [UIColor lightGrayColor];
              break;
          }
          case 1:
@@ -183,11 +204,15 @@
              cell.detailTextLabel.text = myDesc;
              cell.detailTextLabel.numberOfLines = 3;
              cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+             cell.textLabel.textColor = [UIColor lightGrayColor];
+
              break;
          }
          case 2:
          {
              cell.textLabel.text = @"图片"; 
+             cell.textLabel.textColor = [UIColor lightGrayColor];
+
              UIView *view = [[UIView alloc] initWithFrame:CGRectMake(50, 2, 60, 60)];
 
              int i = 0;

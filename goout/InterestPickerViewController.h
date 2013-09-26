@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface InterestPickerViewController : UIViewController<UITextFieldDelegate>
+
 
 @property (weak, nonatomic) IBOutlet UIView *imageContainerView;
 @property (weak, nonatomic) IBOutlet UITextField *comments;

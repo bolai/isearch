@@ -28,6 +28,6 @@
 - (void)AlbumPicker;
 - (void)takePhoto;
 - (void)pushPickerView:(NSArray *)info;
-- (NSString *)currentAddress;
+- (NSString *)currentAddress:(CLLocation *)yourLocation;
 
 @end

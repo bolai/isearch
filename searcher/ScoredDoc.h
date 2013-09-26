@@ -11,12 +11,12 @@
 
 @interface ScoredDoc : NSObject
 {
-    int score;
+    double score;
     Dish *dish;
 }
-@property(nonatomic) int score;
+@property(nonatomic) double score;
 @property(nonatomic,retain) Dish *dish;
 
--(id) initWithScAndDish: (int)ascore dish:(Dish *)adish;
+-(id) initWithScAndDish: (double)ascore dish:(Dish *)adish;
 
 @end

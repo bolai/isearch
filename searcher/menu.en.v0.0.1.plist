@@ -7,7 +7,7 @@
 	<key>1</key>
 	<dict>
 		<key>name</key>
-		<string>鱼香肉丝</string>
+		<string>yuxiangrousi</string>
 		<key>description</key>
 		<string>很好吃</string>
 		<key>meterials</key>
@@ -26,7 +26,7 @@
 	<key>2</key>
 	<dict>
 		<key>name</key>
-		<string>麻婆豆腐</string>
+		<string>mapodoufu</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -44,7 +44,7 @@
 	<key>3</key>
 	<dict>
 		<key>name</key>
-		<string>西红柿炒鸡蛋</string>
+		<string>xihongshichaojidan</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -62,7 +62,7 @@
 	<key>4</key>
 	<dict>
 		<key>name</key>
-		<string>丸来丸去</string>
+		<string>wanlaiwanqu</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -80,7 +80,7 @@
 	<key>5</key>
 	<dict>
 		<key>name</key>
-		<string>酿豆腐</string>
+		<string>niangdoufu</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -98,7 +98,7 @@
 	<key>6</key>
 	<dict>
 		<key>name</key>
-		<string>虎皮尖椒</string>
+		<string>hupijianjiao</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -116,7 +116,7 @@
 	<key>7</key>
 	<dict>
 		<key>name</key>
-		<string>麻婆酱豆腐</string>
+		<string>mapojiangdoufu</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -134,7 +134,7 @@
 	<key>8</key>
 	<dict>
 		<key>name</key>
-		<string>麻婆烤尖椒</string>
+		<string>mapokaojianjiao</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -152,7 +152,7 @@
 	<key>9</key>
 	<dict>
 		<key>name</key>
-		<string>鱼头豆腐汤</string>
+		<string>yutoudoufutang</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -170,7 +170,7 @@
 	<key>10</key>
 	<dict>
 		<key>name</key>
-		<string>豆腐脑</string>
+		<string>doufunao</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>
@@ -188,7 +188,7 @@
 	<key>11</key>
 	<dict>
 		<key>name</key>
-		<string>豆腐皮包菜</string>
+		<string>doufupibaocai</string>
 		<key>description</key>
 		<string>挺好吃</string>
 		<key>meterials</key>

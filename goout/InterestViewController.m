@@ -20,6 +20,7 @@
     CLLocation *tempCurrentLocation;
     UIImage *choosenImgs;
     UIView *myInfoView;
+    int allDataCount;
     //
 }
 @synthesize viewForMap;
@@ -140,42 +141,6 @@
 
         [locationManager stopUpdatingLocation];
         
-        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-        NSString *comments = [defaults objectForKey:@"comments"];
-        NSData *imagesInfo = [defaults dataForKey:@"imagesInfo"];
-        NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:imagesInfo];
-        GMSMarker *marker;
-        if ([array count] > 0) {
-            NSString *sAddress = [defaults objectForKey:@"address"];
-        
-            double dLatitude = [defaults doubleForKey:@"latitude"];
-            
-            double dLongitude = [defaults doubleForKey:@"longitude"];
-            
-            marker = [[GMSMarker alloc] init];
-            //
-            marker.position = CLLocationCoordinate2DMake(dLatitude, dLongitude);
-            NSLog(@"lat  %f", dLatitude);
-            NSLog(@"long  %f", dLongitude);
-            NSLog(@"comments  %@", comments);
-            NSLog(@"adress  %@", sAddress);
-
-            marker.title = comments;
-            marker.snippet = sAddress;
-            marker.infoWindowAnchor = CGPointMake(0.44f, 0.45f);
-            //marker.icon = [UIImage imageNamed:@"users.png"];
-            marker.userData = array;
-        }
-        
-        
-        /*
-        CLLocation* dist=[[CLLocation alloc] initWithLatitude:marker.position.latitude longitude:marker.position.longitude];  
-        CLLocationDistance meters=[currentLocation distanceFromLocation:dist];
-        
-        NSLog(@"distance is:%f",meters);
-        self.distancelabel.text = [NSString stringWithFormat:@"distance %.0f meters", meters];
-         */
-        
         camera = [GMSCameraPosition cameraWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude zoom:10];
         self.mapView = [GMSMapView mapWithFrame:self.viewForMap.bounds camera:camera];
         self.mapView.delegate = self;
@@ -183,11 +148,65 @@
         
         self.mapView.myLocationEnabled = YES;
         self.mapView.settings.myLocationButton = YES;
-                
         
-        //display marker on map
-        if(marker){
-            marker.map = self.mapView;
+        
+        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+        NSMutableArray *allData = [defaults objectForKey:@"allData"];
+        allDataCount = [allData count];
+        if(allData){
+            for (id obj in allData) {
+                if ([obj isKindOfClass:[NSMutableDictionary class]]){
+                    NSMutableDictionary *dic = obj;
+                    NSString *comments = [dic objectForKey:@"comments"];
+                    NSData *imagesInfo = [dic objectForKey:@"imagesInfo"];
+                    NSString *sAddress = [dic objectForKey:@"myAddress"];
+                    NSNumber *d = [dic objectForKey:@"latitude"];
+                    double dLatitude = [d doubleValue];
+                    NSNumber *e = [dic objectForKey:@"longitude"];
+                    double dLongitude = [e doubleValue];
+                    NSString *favorite = [dic objectForKey:@"favorite"];
+                
+                    NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:imagesInfo];
+                    GMSMarker *marker;
+                    //if ([array count] > 0) {
+                    
+                    marker = [[GMSMarker alloc] init];
+                    //
+                    marker.position = CLLocationCoordinate2DMake(dLatitude, dLongitude);
+                    NSLog(@"lat  %f", dLatitude);
+                    NSLog(@"long  %f", dLongitude);
+                    NSLog(@"comments  %@", comments);
+                    NSLog(@"adress  %@", sAddress);
+                    
+                    marker.title = comments;
+                    marker.snippet = sAddress;
+                    marker.infoWindowAnchor = CGPointMake(0.44f, 0.45f);
+                    if([favorite isEqual:@"yes"]){
+                        marker.icon = [UIImage imageNamed:@"favorite_place.png"];
+                    }
+                    marker.userData = array;
+                    //}
+                
+                    //display marker on map
+                    if(marker){
+                        marker.map = self.mapView;
+                    }
+                
+                    
+                    //兴趣点距离提示
+                     CLLocation* dist=[[CLLocation alloc] initWithLatitude:marker.position.latitude longitude:marker.position.longitude];  
+                     CLLocationDistance meters=[currentLocation distanceFromLocation:dist];
+                 
+                     NSLog(@"distance is:%f",meters);
+                    //兴趣点小于200米弹出提示框
+                    if(meters < 200){
+                        UIAlertView *errorAlert = [[UIAlertView alloc]
+                                                   initWithTitle:@"200米内有我的兴趣地点" message:comments delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        [errorAlert show];
+                    }
+                     
+                }
+            }
         }
         //circle
         CLLocationCoordinate2D circleCenter = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
@@ -280,7 +299,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     InterestMarkerViewController *imc = [storyboard instantiateViewControllerWithIdentifier:@"InterestMarkerViewController"];
     
-    [imc handelTitle:marker.title desc:marker.snippet address:[self currentAddress] imageInfos:marker.userData];
+    [imc handelTitle:marker.title desc:marker.snippet address:[self currentAddress:tempCurrentLocation] imageInfos:marker.userData];
     
     [self.navigationController pushViewController:imc animated:YES];
 }
@@ -321,16 +340,16 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     InterestPickerViewController *ipc = [storyboard instantiateViewControllerWithIdentifier:@"InterestPickerViewController"];
 
-    NSString *currentAddress = [self currentAddress];
+    NSString *currentAddress = [self currentAddress:tempCurrentLocation];
     [ipc handleImage:info address:currentAddress latitude:tempCurrentLocation.coordinate.latitude longitude: tempCurrentLocation.coordinate.longitude];
     NSLog(@"55555 %f", tempCurrentLocation.coordinate.latitude);
     NSLog(@"%@", currentAddress);
     [self.navigationController pushViewController:ipc animated:YES];
 }
 
-- (NSString *)currentAddress{
+- (NSString *)currentAddress:(CLLocation *)yourLocation{
     NSString static * address;
-    [geocoder reverseGeocodeLocation:tempCurrentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+    [geocoder reverseGeocodeLocation:yourLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
@@ -396,6 +415,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+    NSMutableArray *allData = [defaults objectForKey:@"allData"];
+    if([allData count] != allDataCount)
+    {
+        [locationManager startUpdatingLocation];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -417,12 +442,45 @@
 {
     NSLog(@"long press...");
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
+    marker.position = coordinate;
     
-    marker.title = @"address";
-    marker.snippet = @"test";
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    NSString *address = [self currentAddress:location];
+    marker.title = @"something";
+    marker.snippet = address;
     marker.animated = YES;
     marker.map = self.mapView;
+    
+    //保存数据：
+    
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];    
+    //NSData *imagesData = [NSKeyedArchiver archivedDataWithRootObject:imagesInfo];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:10];
+    [dic setObject:@"something" forKey:@"comments"];
+    //[dic setObject:imagesData forKey:@"imagesInfo"];
+    if (!address) {
+        address = @"";
+    }
+    [dic setObject:address forKey:@"myAddress"];
+    [dic setObject:@"no" forKey:@"favorite"];
+    [dic setObject:[[NSNumber alloc]initWithDouble:coordinate.latitude] forKey:@"latitude"];
+    [dic setObject:[[NSNumber alloc]initWithDouble:coordinate.longitude]  forKey:@"longitude"];
+    
+    
+    NSMutableArray *allData = [defaults objectForKey:@"allData"];
+    
+    if (!allData) {
+        allData = [[NSMutableArray alloc] initWithObjects:dic, nil];
+        [defaults setObject:allData forKey:@"allData"];
+    }
+    else{
+        allData = [allData mutableCopy];
+        [allData addObject:dic];
+        [defaults setObject:allData forKey:@"allData"];
+    }
+    
+    [defaults synchronize];//用synchronize方法把数据持久化到standardUserDefaults数据库
 
 }
 

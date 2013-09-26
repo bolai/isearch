@@ -13,6 +13,7 @@
 #import "DishesDefinitionReader.h"
 #import "SimilarSearcher.h"
 #import "ScoredDoc.h"
+#import "MenuTranslator.h"
 
 @implementation MenuViewController
 
@@ -72,24 +73,21 @@
     
     NSString * recogText = [tesseract recognizedText];
     NSLog(@"test..: %@",recogText);
-    recogText = @"pork";
-    self.ourtext.text = recogText;
+    //self.ourtext.text = recogText;
     [tesseract clear];
     
     
-    NSString * file = @"menu.cn.v0.0.1";
-    DishesDefinitionReader *reader = [[DishesDefinitionReader alloc] initWithFilePath:file];
-    [reader readDishDefinitions];
-    NSMutableArray *dishList = [reader dishesList];
-    SimilarSearcher *ss = [[SimilarSearcher alloc] initWithDishes:dishList similarResultNum:5];
-    //NSString *target = @"麻婆豆腐";
-    NSString *target = recogText;
-    NSMutableArray *sdList = [ss searchSimilar:target];
-    //NSLog(@"Search the dish: %@", target);
+    NSString * cnFile = @"menu.cn.v0.0.1";
+    NSString * enFile = @"menu.en.v0.0.1";
+    MenuTranslator *mt = [[MenuTranslator alloc] initWithLangs:enFile srcLang:@"en" targetFile:cnFile targetLang:@"cn"];
+    NSString *target = @"a kind of mapo";
+    NSMutableArray *sdList = [mt translate:target];
+    NSLog(@"Search the dish: %@", target);
     // insert code here...
     for (int i=0; i<[sdList count]; i++) {
         ScoredDoc *sd = [sdList objectAtIndex:i];
-        NSLog(@"The top %i dish is: %@, with the similarity %i", i, [[sd dish] dishName], [sd score]);
+        NSLog(@"The top %i dish is: %@, with the similarity %f", i, [[sd dish] dishName], [sd score]);
+        self.ourtext.text = [[[sdList objectAtIndex:0] dish] dishName];
     }
 }
 

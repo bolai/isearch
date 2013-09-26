@@ -13,7 +13,7 @@
 @synthesize score;
 @synthesize dish;
 
--(id) initWithScAndDish: (int)ascore dish:adish
+-(id) initWithScAndDish: (double)ascore dish:adish
 {
     self = [super init];
     if (self) {

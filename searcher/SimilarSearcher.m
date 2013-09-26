@@ -105,7 +105,8 @@
     for (int i=0; i<[dishList count]; i++) {
         Dish *dish = [dishList objectAtIndex:i];
         int score = [self scoreDocument: targetString aDish:dish];
-        ScoredDoc *sd = [[ScoredDoc alloc] initWithScAndDish:score dish:dish];
+        double dscore = ((double)score)/((double)[[dish dishName] length]);
+        ScoredDoc *sd = [[ScoredDoc alloc] initWithScAndDish:dscore dish:dish];
         [self insertScoredDoc: scoredDocList scoredDoc:sd];
     }  
     
